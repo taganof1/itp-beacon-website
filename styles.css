@@ -1,0 +1,48 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+header {
+    background: linear-gradient(to bottom, #888, #444);
+    padding: 10px 0;
+}
+
+.navbar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo {
+    max-width: 100%;
+    height: auto;
+}
+
+.timetable {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.timetable-title h3 {
+    color: #333;
+}
+
+.timetable-box {
+    border: 1px solid #333;
+    padding: 20px;
+    margin: 0 auto 20px; /* Add margin-bottom to create space */
+    max-width: 600px;
+}
+
+.beacon-box {
+    margin: 0 auto;
+    border: 1px solid #333;
+    padding: 20px;
+    max-width: 300px;
+    height: 250px;
+}
+
+.beacon-text {
+    text-align: center;
+}
