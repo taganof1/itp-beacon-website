@@ -46,3 +46,15 @@ header {
 .beacon-text {
     text-align: center;
 }
+
+.footer {
+    height: 20px;
+    border-top: 1px solid #000;
+    text-align: center;
+    line-height: 20px;
+}
+
+.footer-text p {
+    display: inline-block;
+    margin: 0 10px;
+}
