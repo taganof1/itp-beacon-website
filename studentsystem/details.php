@@ -19,6 +19,7 @@ if ($conn->connect_error) {
 }
 
 $username = $_SESSION['username'];
+
 $sql = "SELECT * FROM students WHERE username='$username'";
 $result = $conn->query($sql);
 
@@ -30,14 +31,22 @@ if ($result->num_rows > 0) {
         echo "Last Name: " . $row["lastname"] . "<br>";
         echo "Course: " . $row["course"] . "<br>";
 
+        // Set the timezone to UK
+        date_default_timezone_set('Europe/London');
+        
         // Display the logintime data as a multiline text field
         echo "Login Time: <br>";
-        echo "<form action=\"\" method=\"POST\">";
-        echo "<textarea name='logintime' id='logintime' rows='4' cols='50'>" . $row["logintime"] . "</textarea><br>";
-
-        // Add a submit button to save the login time
-        echo "<input type='submit' name='submit' value='Submit'><br>";
-        echo "</form>";
+        
+        // Change date and time format to UK format
+        $logintime = empty($row["logintime"]) ? "" : date("d/m/Y H:i:s", strtotime($row["logintime"]));
+        echo "<textarea name='logintime' id='logintime' rows='4' cols='50' disabled>" . $logintime . "</textarea><br>";
+        
+        // Add a submit button to save the login time if it's not already set
+        if (empty($row["logintime"])) {
+            echo "<form action=\"\" method=\"POST\">";
+            echo "<input type='submit' name='submit' value='Check In'><br>";
+            echo "</form>";
+        }
 
         // Retrieve the subject values from the ENUM column
         $subjectSql = "SHOW COLUMNS FROM students LIKE 'subject'";
@@ -46,9 +55,10 @@ if ($result->num_rows > 0) {
         if ($subjectResult->num_rows > 0) {
             $subjectRow = $subjectResult->fetch_assoc();
             $enumValues = explode(",", str_replace("'", "", substr($subjectRow['Type'], 5, (strlen($subjectRow['Type']) - 6))));
+
             echo "Subject: ";
             echo "<select>";
-
+            
             // Add options to the dropdown
             foreach ($enumValues as $value) {
                 echo "<option value='$value'>$value</option>";
@@ -60,14 +70,20 @@ if ($result->num_rows > 0) {
 
     // Handle form submission
     if (isset($_POST['submit'])) {
-        $logintime = $_POST['logintime'];
+        // Check if it's a new day or if login time is not set
+        if (empty($row["logintime"])) {
+            $logintime = date("Y-m-d H:i:s");
+            
+            // Update the login time in the database table
+            $updateSql = "UPDATE students SET logintime='$logintime' WHERE username='$username'";
 
-        // Update the login time in the database table
-        $updateSql = "UPDATE students SET logintime='$logintime' WHERE username='$username'";
-        if ($conn->query($updateSql) === TRUE) {
-            echo "<p>Login time saved successfully!</p>";
+            if ($conn->query($updateSql) === TRUE) {
+                echo "<p>Login time saved successfully!</p>";
+            } else {
+                echo "Error updating login time: " . $conn->error;
+            }
         } else {
-            echo "Error updating login time: " . $conn->error;
+            echo "<p>Login time already set for today.</p>";
         }
     }
 } else {
@@ -78,31 +94,12 @@ $conn->close();
 ?>
 
 <script>
-    function handlePuckData(data) {
-        var logintimeField = document.getElementById('logintime');
-        logintimeField.value = data;
-    }
-
-    function fetchDataFromPuck() {
-        // Make an AJAX request to the server to fetch data from the Puck.js device
-        var xhr = new XMLHttpRequest();
-        xhr.onreadystatechange = function() {
-            if (xhr.readyState == XMLHttpRequest.DONE) {
-                if (xhr.status == 200) {
-                    handlePuckData(xhr.responseText);
-                }
-            }
-        };
-        xhr.open('GET', 'puck_data.php', true);
-        xhr.send();
-    }
-
-    // Call fetchDataFromPuck() when the page is loaded
-    window.onload = function() {
-        fetchDataFromPuck();
-    };
+// Disable form resubmission on refresh
+if (window.history.replaceState) {
+    window.history.replaceState(null, null, window.location.href);
+}
 </script>
 
 <form action="logout.php" method="POST">
-    <button type="submit">Logout</button>
+    <!-- Your logout form -->
 </form>
