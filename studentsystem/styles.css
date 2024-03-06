@@ -77,3 +77,11 @@ button {
 button:hover {
     background-color: #555;
 }
+
+.container-text {
+    text-align: center;
+}
+
+.container-text b {
+    display: inline-block;
+}
