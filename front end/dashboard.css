@@ -1,0 +1,158 @@
+@font-face {
+  font-family: 'UWE';
+  src: url('resources\Parisine\Parisine Regular\Parisine Regular.otf') format('otf'); /* Modern Browsers */
+  margin: 10rem;
+  font-weight: normal;
+  font-style: normal;
+  color: white;
+}
+
+body {
+  display: flex;
+  flex-direction: column; /* Ensure header, content, and footer stack vertically */
+  align-items: center;
+  height: auto;
+  margin: 0;
+  background-image: linear-gradient(to bottom, #3b3747, #0c626b, #44677a);
+  overflow-x: hidden;
+  font-family: 'UWE', sans-serif;
+}
+
+header {
+  width: 100vw;
+  color: white;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header-logo {
+  width: 150px; /* Adjust size as needed */
+  height: auto;
+  padding-right: 20%;
+  padding-top: 0;
+}
+
+.application-header-text {
+  padding-left: 20%;
+  font-size: 2em;
+}
+
+.grid-container {
+  display: grid;
+  width: 30.7rem;
+  grid-template-columns: repeat(3, 1.2fr);
+  grid-template-rows: repeat(3, auto); /* Changed to 'auto' to accommodate square items */
+  gap: 3rem;
+  padding-bottom: 12%;
+  justify-content: center;
+  align-items: center;
+  margin: 1rem;
+}
+
+.grid-item {
+  background-color: #ffffff;
+  border: 1px solid #999;
+  text-align: center;
+  aspect-ratio: 1; /* Ensures the items are square */
+  display: flex; /* Center content horizontally */
+  justify-content: center; /* Center content horizontally */
+  align-items: center; /* Center content vertically */
+}
+
+.grid-item-invisible {
+  visibility: hidden;
+  background-color: #ccc;
+  border: 1px solid #999;
+  text-align: center;
+  aspect-ratio: 1; /* Ensures the items are square */
+}
+
+
+.circular-button {
+  background-color: #48abe0;
+  color: black;
+  border: none;
+  background: white;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%; /* Makes the buttons circular */
+  width: 100%;
+  height: auto;
+  box-shadow: 0 0 8px 4px rgba(0,0,0,.2);
+}
+
+.circular-button:active {
+  transform: scale(0.9); /* Make the button 90% of its original size while being clicked */
+}
+
+.large-button {
+  position: relative;
+  font-size: 24px; /* Example size, adjust as needed */
+  width: 200%; /* Example width, adjust as needed */
+  height: auto; /* Example height, adjust as needed */
+  left: -50%;
+  box-shadow: 0 0 8px 4px rgba(0,0,0,.2);
+}
+
+.button-text{
+  font-size: small;
+  font-family: 'UWE', sans-serif;
+  color: black;
+}
+
+.button-text-large{
+  font-family: 'UWE', sans-serif;
+  font-size: large;
+  color: black;
+}
+
+.text-box-container {
+  width: 70%;
+  box-shadow: 0 0 8px 4px rgba(0,0,0,.2);
+  background: rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin-top: -10%;
+  text-align: center;
+}
+
+.text-box-container h3 {
+  margin-bottom: 10px;
+}
+
+footer {
+  width: 100vw;
+  background-color: #333;
+  color: white;
+  padding: 20px;
+  text-align: center;
+}
+
+a{
+  text-decoration: none; /* Removes underline */
+  color: inherit; /* Inherits the color from the parent element */
+}
+
+h3{
+  color: white;
+}
+
+p{
+  color: white;
+}
+
+@media (orientation: portrait) {
+  .application-header-text {
+    display: none;
+  }
+
+  .header-logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
