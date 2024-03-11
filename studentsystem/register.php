@@ -29,7 +29,7 @@ $sql = "INSERT INTO students (username, password, firstname, lastname, course, s
         VALUES ('$student_id', '$password', '$firstname', '$lastname', '$course', '$student_id')";
 
 if ($conn->query($sql) === TRUE) {
-    echo "<script>alert('Account created successfully. Student ID: $student_id'); window.location='index.html';</script>";
+    echo "<script>alert('Account created successfully. Student ID: $student_id'); window.location='../frontend/dashboard.html';</script>";
 } else {
     echo "Error: " . $sql . "<br>" . $conn->error;
 }
