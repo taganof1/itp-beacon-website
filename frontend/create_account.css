@@ -16,6 +16,7 @@ body {
   overflow-x: hidden;
   font-family: 'UWE', sans-serif;
   min-height: 100vh;
+  min-width: 100vw;
 }
 
 header {
@@ -78,10 +79,14 @@ header {
 
 footer {
   width: 100vw;
+  height: 1rem;
   background-color: #002b30;
   color: white;
   padding: 20px;
   text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   position: absolute;
   left: -0;
   bottom: -0;
@@ -94,7 +99,7 @@ a{
 
 .container {
   max-width: 50rem;
-  width: 50rem;
+  width: 75%;
   height: 29rem;
   margin: 50px auto;
   background-color: white;
@@ -157,13 +162,15 @@ h2{
   font-family: 'UWE', sans-serif;
   color: black;
   text-align: center;
-  margin-top: 20%;
+  margin-top: 1.6rem;
   font-size: large;
 }
 
 .loginButton {
   box-shadow: 0 0 8px 4px rgba(0,0,0,.2);
   background: rgba(255, 255, 255, 0.7);
+  width: 50%;
+  margin-top: -0%;
   text-align: center;
   justify-content: center;
 }
